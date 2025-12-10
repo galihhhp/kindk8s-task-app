@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  NODE_ENV: "production"
+  DB_PASSWORD: "12345"
+  FEATURE_EDIT_TASK: "true"
+  FEATURE_DELETE_TASK: "true"
+  # backend's image have default value for all env variables
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  FEATURE_EDIT_TASK: "true"
+  FEATURE_DELETE_TASK: "true"

@@ -1,0 +1,5 @@
+namespace: production
+resources:
+  - ../../base/
+  - namespace.yaml
+  - configmap.yaml

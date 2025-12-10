@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-frontend
+spec:
+  selector:
+    app: react-frontend
+  type: ClusterIP
+  ports:
+    - name: react-frontend-service
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
