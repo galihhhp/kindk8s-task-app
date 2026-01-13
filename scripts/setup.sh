@@ -88,13 +88,13 @@ fi
 
 echo -e "\n${BOLD}=== Deploying observability stack ===${NC}"
 
-cd "$PROJECT_DIR/observability/base"
+cd "$PROJECT_DIR/observability/env/dev"
 
 if [ -f kustomization.yaml ]; then
     kubectl apply -k .
     echo -e "${GREEN}[INFO]${NC} Observability stack deployed"
 else
-    echo -e "${YELLOW}[WARN]${NC} observability/base/kustomization.yaml not found, skipping"
+    echo -e "${YELLOW}[WARN]${NC} observability/env/dev/kustomization.yaml not found, skipping"
 fi
 
 echo -e "\n${BOLD}=== Waiting for pods to be ready ===${NC}"
