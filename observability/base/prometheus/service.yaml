@@ -7,7 +7,7 @@ metadata:
 spec:
   selector:
     app: prometheus
-    tier: server
+    tier: monitoring
   type: ClusterIP
   ports:
     - name: prometheus

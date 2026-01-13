@@ -7,17 +7,17 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: prometheus # has to match .spec.template.metadata.labels
-      tier: server
+      app: prometheus
+      tier: monitoring
   serviceName: "prometheus"
-  replicas: 1 # by default is 1
+  replicas: 1
   template:
     metadata:
       annotations:
         kubectl.kubernetes.io/default-container: prometheus
       labels:
-        app: prometheus # has to match .spec.selector.matchLabels
-        tier: server
+        app: prometheus
+        tier: monitoring
     spec:
       serviceAccountName: prometheus
       terminationGracePeriodSeconds: 10

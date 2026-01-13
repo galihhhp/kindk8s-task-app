@@ -6,7 +6,7 @@ metadata:
   namespace: observability
 spec:
   selector:
-    name: node-exporter
+    app: node-exporter
   type: ClusterIP
   ports:
     - name: node-exporter-service

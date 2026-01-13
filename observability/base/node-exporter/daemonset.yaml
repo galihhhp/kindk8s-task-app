@@ -5,14 +5,16 @@ metadata:
   namespace: observability
   labels:
     app: node-exporter
+    tier: monitoring
 spec:
   selector:
     matchLabels:
-      name: node-exporter
+      app: node-exporter
   template:
     metadata:
       labels:
-        name: node-exporter
+        app: node-exporter
+        tier: monitoring
     spec:
       tolerations:
         # these tolerations are to have the daemonset runnable on control plane nodes
