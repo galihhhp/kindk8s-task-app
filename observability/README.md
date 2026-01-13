@@ -3,7 +3,6 @@
 Folder `obervability/` ini berfokus ke observability full stack untuk memonitor aplikasi di `app/`:
 
 - Prometheus (metrics collection)
-- Alertmanager (alerting)
 - Grafana (dashboards)
 - Loki + Promtail (logs)
 - kube-state-metrics, node-exporter (cluster metrics)
@@ -24,7 +23,7 @@ Observability stack mengasumsikan aplikasi di namespace `development` dengan:
 
 ---
 
-## Phase 1: Metrics Stack (Prometheus + Alertmanager + kube-state-metrics + node-exporter)
+## Phase 1: Metrics Stack (Prometheus + kube-state-metrics + node-exporter)
 
 Target phase ini: bisa mengumpulkan metrics dari cluster dan aplikasi.
 Semua dikelola sebagai manifests YAML dan diorganisasi dengan Kustomize.
@@ -77,30 +76,7 @@ Semua dikelola sebagai manifests YAML dan diorganisasi dengan Kustomize.
 
 ---
 
-### Task 1.2: Alertmanager
-
-**Files:**
-
-- `obervability/base/alertmanager/`
-
-**Requirements:**
-
-- Deploy Alertmanager Deployment/StatefulSet + Service
-- Hubungkan Prometheus ke Alertmanager (alerting config)
-- Minimal konfigurasi alert:
-  - Alert kalau node down
-  - Alert kalau pod pending terlalu lama
-- Output bisa sederhana: log target (tidak perlu email/Slack dulu)
-
-**Learning:**
-
-- ✅ Alertmanager basics
-- ✅ Alert routing from Prometheus
-- ✅ Basic alert rules
-
----
-
-### Task 1.3: Overlays for Dev Observability
+### Task 1.2: Overlays for Dev Observability
 
 **Files:**
 
@@ -253,38 +229,17 @@ Target: punya satu UI pusat untuk melihat metrics dan logs.
 
 ---
 
-## Phase 4: Alerting Scenarios
+## Phase 4: Validation & Failure Scenarios
 
-### Task 4.1: Basic Alert Rules
-
-**Files:**
-
-- Prometheus alert rules di `obervability/base/prometheus/alerts.yaml`
-
-**Requirements:**
-
-- Tambah minimal alert:
-  - Node down
-  - High CPU usage untuk node atau pod
-  - Pod status tidak running terlalu lama
-- Verifikasi alert ter-load di Prometheus UI
-
-**Learning:**
-
-- ✅ Alert rule configuration
-- ✅ Alert lifecycle
-
----
-
-### Task 4.2: Simulate Failures
+### Task 4.1: Simulate Failures
 
 **Scenarios:**
 
-- Scale down backend ke 0 replicas dan lihat efeknya di metrics/logs
-- Paksa pod crash (image salah atau env salah) dan lihat alert
+- Scale down backend ke 0 replicas dan lihat efeknya di metrics (Prometheus)
+- Paksa pod crash (image salah atau env salah) dan lihat error di logs (Loki)
 - Observasi di Grafana:
-  - perubahan metrics
-  - logs error
+  - Perubahan metrics (pod availability)
+  - Logs error (stack traces)
 
 **Learning:**
 
@@ -308,7 +263,6 @@ Target: punya satu UI pusat untuk melihat metrics dan logs.
 - [ ] Data source Prometheus dan Loki healthy di Grafana
 - [ ] Dashboard cluster menunjukkan metrics
 - [ ] Logs backend terlihat di Grafana (Loki)
-- [ ] Alert rules loaded di Prometheus
 
 **Learning:**
 
@@ -341,7 +295,6 @@ obervability/
 │   ├── kustomization.yaml
 │   ├── namespace.yaml
 │   ├── prometheus/
-│   ├── alertmanager/
 │   ├── kube-state-metrics/
 │   ├── node-exporter/
 │   ├── loki/
@@ -361,7 +314,6 @@ obervability/
 - ✅ Namespace `observability` untuk observability stack
 - ✅ Observability stack lengkap running di `observability`:
   - Prometheus
-  - Alertmanager
   - kube-state-metrics
   - node-exporter
   - Loki
@@ -380,12 +332,11 @@ obervability/
 - ✅ Deploy observability stack full dengan manifests yang diorganisasi via Kustomize
 - ✅ Baca dan pahami metrics cluster dan aplikasi
 - ✅ Baca dan filter logs via Loki di Grafana
-- ✅ Buat dan uji alert sederhana di Prometheus/Alertmanager
-- ✅ Debug issue aplikasi menggunakan kombinasi metrics + logs + alert
+- ✅ Debug issue aplikasi menggunakan kombinasi metrics + logs
 
 ### 4. Next Steps
 
 - ✅ Tambah HPA (Horizontal Pod Autoscaler) menggunakan metrics Prometheus
 - ✅ Tambah Ingress + TLS untuk akses Grafana dan aplikasi
-- ✅ Integrasi alert ke channel eksternal (email, Slack) di Alertmanager
+- ✅ Tambah Alertmanager untuk integrasi alert ke channel eksternal (email, Slack)
 - ✅ Refactor observability manifests menjadi reusable modules untuk project lain
