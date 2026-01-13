@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-state-metrics
+  namespace: observability
+  labels:
+    app: kube-state-metrics
+spec:
+  selector:
+    app: kube-state-metrics
+  ports:
+    - name: http-metrics
+      protocol: TCP
+      port: 8080
+      targetPort: 9080
+    - name: telemetry
+      protocol: TCP
+      port: 8081
+      targetPort: 9081

@@ -13,3 +13,8 @@ resources:
   - node-exporter/daemonset.yaml
   - node-exporter/service.yaml
   - node-exporter/serviceaccount.yaml
+  - kube-state-metrics/clusterrole.yaml
+  - kube-state-metrics/clusterrolebinding.yaml
+  - kube-state-metrics/deployment.yaml
+  - kube-state-metrics/service.yaml
+  - kube-state-metrics/serviceaccount.yaml
