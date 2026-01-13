@@ -17,6 +17,20 @@ data:
           - targets:
               - localhost:9090
 
+      - job_name: node-exporter
+        kubernetes_sd_configs:
+          - role: endpoints
+            namespaces:
+              names:
+                - observability
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_service_name]
+            regex: node-exporter-service
+            action: keep 
+          - source_labels: [__meta_kubernetes_pod_ip]
+            target_label: __address__
+            replacement: $1:9100
+
       - job_name: kubernetes-pods-development
         kubernetes_sd_configs:
           - role: pod

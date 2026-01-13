@@ -8,3 +8,8 @@ resources:
   - prometheus/configmap.yaml
   - prometheus/service.yaml
   - prometheus/statefulset.yaml
+  - node-exporter/clusterrole.yaml
+  - node-exporter/clusterrolebinding.yaml
+  - node-exporter/daemonset.yaml
+  - node-exporter/service.yaml
+  - node-exporter/serviceaccount.yaml
