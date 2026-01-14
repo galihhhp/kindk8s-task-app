@@ -25,9 +25,18 @@ spec:
         - key: node-role.kubernetes.io/master
           operator: Exists
           effect: NoSchedule
+      serviceAccountName: node-exporter
       containers:
         - name: node-exporter
           image: prom/node-exporter:v1.8.2
+          args:
+            - '--path.procfs=/host/proc'
+            - '--path.sysfs=/host/sys'
+            - '--path.rootfs=/host/root'
+            - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+          ports:
+            - containerPort: 9100
+              name: metrics
           resources:
             limits:
               memory: 200Mi

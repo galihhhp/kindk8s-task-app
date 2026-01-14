@@ -17,3 +17,7 @@ resources:
   - kube-state-metrics/deployment.yaml
   - kube-state-metrics/service.yaml
   - kube-state-metrics/serviceaccount.yaml
+  - grafana/service.yaml
+  - grafana/pvc.yaml
+  - grafana/secret.yaml
+  - grafana/deployment.yaml
