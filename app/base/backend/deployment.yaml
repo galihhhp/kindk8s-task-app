@@ -17,10 +17,6 @@ spec:
         app: backend
         tier: api
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
-        fsGroup: 1000
       containers:
         - name: task-image
           image: galihhhp/elysia-backend:1.6

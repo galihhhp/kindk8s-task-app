@@ -17,10 +17,6 @@ spec:
         app: frontend
         tier: ui
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 101
-        fsGroup: 101
       containers:
         - name: task-image
           image: galihhhp/react-frontend:1.9

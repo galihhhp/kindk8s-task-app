@@ -17,9 +17,6 @@ spec:
         app: postgres
         tier: database
     spec:
-      securityContext:
-        runAsUser: 999
-        fsGroup: 999
       containers:
         - name: postgresql-image
           image: postgres:17

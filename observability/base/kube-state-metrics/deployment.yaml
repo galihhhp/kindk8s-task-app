@@ -13,9 +13,6 @@ spec:
       labels:
         app: kube-state-metrics
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 65534
       serviceAccountName: kube-state-metrics
       containers:
         - name: kube-state-metrics
